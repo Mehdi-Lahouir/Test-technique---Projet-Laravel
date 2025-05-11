@@ -16,6 +16,10 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                <x-nav-link :href="route('my-bookings')" :active="request()->routeIs('my-bookings')">
+                    {{ __('Mes réservations') }}
+                </x-nav-link>
+
             </div>
 
             <!-- Settings Dropdown -->

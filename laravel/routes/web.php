@@ -2,7 +2,15 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\MyBookings;
 
+Route::get('/admin/login', fn () => redirect()->to('/login'))
+    ->name('filament.admin.auth.login');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/mes-reservations', MyBookings::class)
+        ->name('my-bookings');
+});
 Route::get('/', function () {
     return view('welcome');
 });

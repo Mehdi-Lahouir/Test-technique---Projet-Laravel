@@ -27,7 +27,11 @@ class BookingManager extends Component
 
     public function book()
     {
-        $this->validate();
+        $this->validate([
+            'propertyId' => ['required', 'exists:properties,id'],
+            'start_date' => ['required', 'date', 'after_or_equal:today'],
+            'end_date'   => ['required', 'date', 'after_or_equal:start_date'],
+        ]);
 
         Booking::create([
             'user_id'     => Auth::id(),
@@ -37,7 +41,6 @@ class BookingManager extends Component
         ]);
 
         session()->flash('success', 'Réservation enregistrée !');
-        // Réinitialise uniquement les dates
         $this->reset(['start_date','end_date']);
     }
 
